@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink Suggestion Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #0056b3;
+        }
+        .result span {
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Drink Suggestion Quiz</h1>
+    <div class="question">
+        <p>1. What time of day are you looking to enjoy your drink?</p>
+        <label><input type="radio" name="timeOfDay" value="morning"> Morning</label><br>
+        <label><input type="radio" name="timeOfDay" value="afternoon"> Afternoon</label><br>
+        <label><input type="radio" name="timeOfDay" value="evening"> Evening</label>
+    </div>
+
+    <div class="question">
+        <p>2. Do you prefer a drink that is:</p>
+        <label><input type="radio" name="flavor" value="sweet"> Sweet</label><br>
+        <label><input type="radio" name="flavor" value="bitter"> Bitter</label><br>
+        <label><input type="radio" name="flavor" value="refreshing"> Refreshing</label>
+    </div>
+
+    <div class="question">
+        <p>3. Are you in the mood for an alcoholic drink?</p>
+        <label><input type="radio" name="alcohol" value="yes"> Yes</label><br>
+        <label><input type="radio" name="alcohol" value="no"> No</label>
+    </div>
+
+    <button onclick="suggestDrink()">Get Drink Suggestion</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function suggestDrink() {
+            const timeOfDay = document.querySelector('input[name="timeOfDay"]:checked').value;
+            const flavor = document.querySelector('input[name="flavor"]:checked').value;
+            const alcohol = document.querySelector('input[name="alcohol"]:checked').value;
+
+            let suggestion = '';
+
+            if (alcohol === 'yes') {
+                if (timeOfDay === 'morning') {
+                    suggestion = 'How about a Mimosa to start your day?';
+                } else if (timeOfDay === 'afternoon') {
+                    if (flavor === 'sweet') {
+                        suggestion = 'A refreshing Mojito sounds perfect for you!';
+                    } else if (flavor === 'bitter') {
+                        suggestion = 'An Aperol Spritz would be a great choice!';
+                    } else {
+                        suggestion = 'Try a Gin and Tonic to keep things refreshing!';
+                    }
+                } else {
+                    if (flavor === 'sweet') {
+                        suggestion = 'A Whiskey Sour would be a delicious option!';
+                    } else if (flavor === 'bitter') {
+                        suggestion = 'How about an Old Fashioned to end your day?';
+                    } else {
+                        suggestion = 'A classic Martini would be an excellent choice!';
+                    }
+                }
+            } else {
+                if (timeOfDay === 'morning') {
+                    suggestion = 'How about starting your day with a fresh Orange Juice?';
+                } else if (timeOfDay === 'afternoon') {
+                    if (flavor === 'sweet') {
+                        suggestion = 'A delicious Lemonade would be perfect!';
+                    } else if (flavor === 'bitter') {
+                        suggestion = 'Try a tonic water with a splash of lime!';
+                    } else {
+                        suggestion = 'A cool Iced Tea sounds refreshing!';
+                    }
+                } else {
+                    if (flavor === 'sweet') {
+                        suggestion = 'End your day with a cozy Hot Chocolate!';
+                    } else if (flavor === 'bitter') {
+                        suggestion = 'A Herbal Tea would be a relaxing choice!';
+                    } else {
+                        suggestion = 'How about a sparkling Water with a hint of citrus?';
+                    }
+                }
+            }
+
+            document.getElementById('result').innerHTML = 'Our suggestion: <span>' + suggestion + '</span>';
+        }
+    </script>
+</body>
+</html>
